@@ -1,5 +1,5 @@
 {
-  "name": "historical",
+  "name": "@kasadev/historical",
   "description": "A Mongoose plugin that archives document diffs and manages document history.",
   "homepage": "https://github.com/stennettm/historical",
   "keywords": [

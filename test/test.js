@@ -57,32 +57,6 @@ describe('Document', function(){
             });
         });
 
-        it('An historical record should be created when a document is saved. without change!!!!!!!!!!!!!!!!!', function(done){
-            document.save(function (e, obj) {
-                assert.equal(e, null);
-                assert.notEqual(obj, null);
-
-                document = obj;
-
-                obj.historical(function (e, details) {
-                    assert.equal(e, null);
-                    assert.notEqual(details, null);
-
-                    var diff = _.merge(details.pop().diff, {_id: obj._id, __v: obj.__v});
-
-                    assert.strictEqual(diff.ignoredField, undefined);
-
-                    var withoutIgnored = obj.toObject();
-                    delete withoutIgnored['ignoredField'];
-                    console.log(diff)
-                    assert.deepEqual(withoutIgnored, diff);
-                    assert.equal(obj.testString, 'My default value');
-
-                    done();
-                });
-            });
-        });
-
         it('An historical record should be created when a document is modified.', function(done){
             document.testObject.testObjectElement = 'this is a test string';
             document.save(function (e, obj) {
