@@ -216,8 +216,8 @@ module.exports = function (schema, options) {
             // invalid input
             if(!Array.isArray(arr)) return Promise.reject(new Error("Non array passed to each"));
             // empty case
-            if(arr.length === 0) return Promise.resolve(); 
-            return arr.reduce(function(prev, cur) { 
+            if(arr.length === 0) return Promise.resolve();
+            return arr.reduce(function(prev, cur) {
                 return prev.then(() => fn(cur))
             }, Promise.resolve());
         }
@@ -346,12 +346,12 @@ module.exports = function (schema, options) {
             if (e) {
                 return callback(e);
             }
-            if (!objs) {
+            if (!objs || objs.length === 0) {
                 return callback(null, null);
             }
 
             objs.forEach(function (obj) {
-                surrogate = obj.diff ? _.merge(surrogate, obj.diff, arrayMerge) : null;
+                surrogate = obj.diff !== null ? _.merge(surrogate, obj.diff, arrayMerge) : null;
             });
 
             if (!surrogate) {
